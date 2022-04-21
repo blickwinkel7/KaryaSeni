@@ -6,7 +6,7 @@ function formatedCurrency (price){
 }
 
 function formatedStatus(status){
-    if(status === true){
+    if(status === false){
         return 'Available'
     } else {
         return 'Sold'

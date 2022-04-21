@@ -22,21 +22,38 @@ class Controller {
     }
 
     static registerForm(req, res) {
-        res.render("auth-pages/register-form")
+        res.render("auth-pages/register-form" , {errors: {} , newUser: {}, profile: {}})
     }
 
     static postRegister(req, res) {
+        let profile = {}
+        let userValue = {}
         const { userName, email, password, isSeller, firstName, lastName, dateOfBirth, imagerUrl } = req.body
         User.create({ userName, email, password, isSeller })
             .then(newUser => {
                 const UserId = newUser.id
+                userValue = newUser
                 sendEmail(email, userName)
                 return Profile.create({firstName, lastName, dateOfBirth, imagerUrl, UserId})
             })
             .then(newProfile => {
+                profile = newProfile
                 res.redirect("/login")
             })
-            .catch(err => res.send(err))
+            .catch(err => {
+                    if (err.name == 'SequelizeValidationError') {
+                        const errors = {}
+                        err.errors.forEach(el => {
+                            if (errors[el.path]) {
+                                errors[el.path].push(el.message)
+                            } else {
+                                errors[el.path] = [el.message]
+                            }
+                        })
+                        return res.render("auth-pages/register-form", { errors , userValue, profile})
+                    }
+                res.send(err)
+            })
     }
 
     static loginForm(req, res) {
