@@ -47,7 +47,7 @@ class Controller {
                     if (isValidPassword) {
                         req.session.userId = user.id
                         req.session.role = user.isSeller
-                        return res.redirect("/")
+                        return res.redirect("/arts")
                     } else {
                         const error = "Invalid username / password"
                         return res.redirect(`/login?error=${error}`)
@@ -76,7 +76,7 @@ class Controller {
 
     //GET CREATE TABEL ARTS
     static formArt(req, res) {
-        res.render("arts-form")
+        res.render("arts-form", { errors: {}, newArt: {} })
     }
 
     static createArt(req, res) {
@@ -94,7 +94,20 @@ class Controller {
             .then(() => {
                 res.redirect("/arts")
             })
-            .catch(err => res.send(err))
+            .catch(err => {
+                if (err.name == 'SequelizeValidationError') {
+                    const errors = {}
+                    err.errors.forEach(el => {
+                        if (errors[el.path]) {
+                            errors[el.path].push(el.message)
+                        } else {
+                            errors[el.path] = [el.message]
+                        }
+                    })
+                    return res.render("arts-form", { errors, newArt })
+                }
+                res.send(err)
+            })
     }
 }
 
