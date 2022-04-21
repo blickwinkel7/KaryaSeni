@@ -10,9 +10,13 @@ const transaction = require("../models/transaction")
 
 class Controller {
     static readArts(req, res) {
-        Art.findAll()
+        Art.findAll({
+            where: {
+                status: false
+            }
+        })
             .then((data) => {
-                res.render("art", { data, formatedCurrency, formatedStatus })
+                return res.render("art", { data, formatedCurrency, formatedStatus })
             })
             .catch(err => res.send(err))
     }
@@ -52,7 +56,7 @@ class Controller {
                     if (isValidPassword) {
                         req.session.userId = user.id
                         req.session.role = user.isSeller
-                        return res.redirect("/arts")
+                        return res.redirect("/")
                     } else {
                         const error = "Invalid username / password"
                         return res.redirect(`/login?error=${error}`)
@@ -63,10 +67,6 @@ class Controller {
                 }
             })
             .catch(err => res.send(err))
-    }
-
-    static home(req, res) {
-        res.render("home", {id: req.session.userId})
     }
 
     static getLogout(req, res) {
@@ -106,7 +106,7 @@ class Controller {
                 })
             })
             .then(transaction => {
-                res.render("profile", {user, transaction})
+                return res.render("profile", {user, transaction})
             })
             .catch(err => res.send(err))
     }
@@ -116,7 +116,7 @@ class Controller {
     }
     //GET CREATE TABEL ARTS
     static formArt(req, res) {
-        res.render("arts-form", { errors: {}, newArt: {} })
+        return res.render("arts-form", { errors: {}, newArt: {} })
     }
 
     static createArt(req, res) {
@@ -132,7 +132,7 @@ class Controller {
             individualHooks: true
         })
             .then(() => {
-                res.redirect("/arts")
+                res.redirect("/")
             })
             .catch(err => {
                 if (err.name == 'SequelizeValidationError') {
@@ -154,7 +154,7 @@ class Controller {
         const { id } = req.params
         Art.findOne({ where: { id: id } })
             .then((data) => {
-                res.render("edit-arts", { data, errors: {} })
+                return res.render("edit-arts", { data, errors: {} })
             })
             .catch(err => res.send(err))
     }
@@ -175,7 +175,7 @@ class Controller {
             }
         })
         .then(() => {
-            res.redirect("/arts")
+            res.redirect("/")
         })
         .catch(err => {
             if (err.name == 'SequelizeValidationError') {
@@ -191,6 +191,46 @@ class Controller {
             }
             res.send(err)
         })
+    }
+
+    static buyArt(req, res) {
+        Art.findOne({
+            where: {
+                id: req.params.id
+            }
+        })
+            .then(art => {
+                console.log(art)
+                return Transaction.create({
+                    price: art.price,
+                    UserId: req.session.userId,
+                    ArtId: req.params.id
+                })
+            })
+            .then(result => {
+                Art.update({
+                    status: true
+                }, {
+                    where: {
+                        id: result.ArtId
+                    }
+                })
+            })
+            .then(result2 => {
+                res.redirect("/")
+            })
+            .catch(err => {
+                res.send(err)
+            })
+    }
+
+    static deleteArt(req, res) {
+        const id = req.params.id
+        Art.deleteArt(id)
+            .then(result => {
+                return res.redirect("/")
+            })
+            .catch(err => res.send(err))
     }
 }
 
