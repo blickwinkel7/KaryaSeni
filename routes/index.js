@@ -7,7 +7,7 @@ const Controller = require("../controllers")
 
 // ROUTES ART
 router.get("/arts",  Controller.readArts)
-router.get("/arts/add", Controller.formArt)
+
 router.post("/arts/add", Controller.createArt)
 
 
@@ -42,6 +42,7 @@ router.use((req, res, next) => {
 })
 
 router.get("/", Controller.home)
+router.get("/arts/add", isSeller, Controller.formArt)
 
 
 
