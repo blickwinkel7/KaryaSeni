@@ -15,15 +15,63 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Art.init({
-    name: DataTypes.STRING,
-    author: DataTypes.STRING,
-    price: DataTypes.INTEGER,
-    description: DataTypes.TEXT,
+    name: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate:{
+        notNull: true,
+        notEmpty:{
+          msg: `Art name is required!`
+        }
+      }
+    },
+    author:{
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate:{
+        notNull: true,
+        notEmpty:{
+          msg: `Author name is required!`
+        }
+      }
+    },
+    price: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      validate:{
+        notEmpty:{
+          msg: `Put your art price!`
+        }
+      }
+    },
+    description:{
+      type: DataTypes.TEXT,
+      allowNull: false,
+      validate:{
+        notEmpty:{
+          msg: `Put your description!`
+        }
+      }
+    },
     status: DataTypes.BOOLEAN,
-    imageUrl:DataTypes.STRING
+    imageUrl:{
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate:{
+        notNull: true,
+        notEmpty:{
+          msg: `Image is required!`
+        }
+      }
+    }
   }, {
     sequelize,
     modelName: 'Art',
+    hooks: {
+      beforeCreate:(instance, option) =>{
+        instance.status = true
+      }
+    }
   });
   return Art;
 };

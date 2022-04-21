@@ -5,4 +5,15 @@ function formatedCurrency (price){
     return price.toLocaleString('id-ID', { style: 'currency', currency: 'IDR' })
 }
 
-module.exports = formatedCurrency
+function formatedStatus(status){
+    if(status === true){
+        return 'Available'
+    } else {
+        return 'Sold'
+    }
+}
+
+module.exports = {
+    formatedCurrency, 
+    formatedStatus
+}

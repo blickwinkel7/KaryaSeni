@@ -10,6 +10,7 @@
 
 <body>
     <h1>THIS IS ART DISPLAY</h1>
+    <a href="/arts/add">Add New Art</a>
 
     <table border="1">
         <tr>
@@ -47,7 +48,7 @@
                     <%= e.description %>
                 </td>
                 <td>
-                    <%= e.status %>
+                    <%= formatedStatus(e.status) %>
                 </td>
                 <td>
                     <img src="<%= e.imageUrl %>" width="100" height="50">
