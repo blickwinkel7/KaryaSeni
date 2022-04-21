@@ -111,9 +111,6 @@ class Controller {
             .catch(err => res.send(err))
     }
 
-    static buyArt(req, res) {
-        Transaction.create()
-    }
     //GET CREATE TABEL ARTS
     static formArt(req, res) {
         res.render("arts-form", { errors: {}, newArt: {} })
