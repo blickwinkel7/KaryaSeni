@@ -13,6 +13,12 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
       Art.hasOne(models.Transaction)
     }
+
+    static deleteArt(id) {
+      return Art.destroy({where: {
+        id: id
+      }})
+    }
   }
   Art.init({
     name: {
@@ -69,7 +75,7 @@ module.exports = (sequelize, DataTypes) => {
     modelName: 'Art',
     hooks: {
       beforeCreate:(instance, option) =>{
-        instance.status = true
+        instance.status = false
       }
     }
   });
