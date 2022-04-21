@@ -19,10 +19,10 @@
   </p>
   
   <h5>Date of Birth</h5>
-  <%= user.Profile.dateOfBirth %>
+  <%= user.Profile.formatDate %>
 
   <h5>Profile Picture</h5>
-  <img src="<%= user.Profile.imagerUrl %>" alt="Profile pic">
+  <img src="<%= user.Profile.imagerUrl %>" alt="Profile pic" width="80" height="100">
 
   <hr>
 
@@ -37,7 +37,7 @@
       </tr>
       <% transaction.forEach(el => { %>
         <tr>
-          <td><img src="<%= el.Art.imageUrl %>" alt="photo"></td>
+          <td><img src="<%= el.Art.imageUrl %>" alt="photo" width="100" height="50"></td>
           <td><%= el.Art.name %></td>
           <td><%= el.Art.author %></td>
           <td><%= formatedCurrency(el.Art.price) %></td>

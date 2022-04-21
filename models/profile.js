@@ -18,9 +18,9 @@ module.exports = (sequelize, DataTypes) => {
       return '' + this.firstName + ' ' + this.lastName
     }
 
-    static formatDate(date) {
+    get formatDate() {
       let options = { year: 'numeric', month: 'long', day: 'numeric' };
-      return date.toLocaleString('en-EN', options)
+      return this.dateOfBirth.toLocaleString('en-EN', options)
     }
   }
   Profile.init({

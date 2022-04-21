@@ -6,10 +6,11 @@ function formatedCurrency (price){
 }
 
 function formatedStatus(status){
-    if(status === true){
-        return 'Sold'
-    } else {
+
+    if(status === false){
         return 'Available'
+    } else {
+        return 'sold'
     }
 }
 
