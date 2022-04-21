@@ -18,7 +18,7 @@
     <a href="/profile">My Profile Page</a>
     <a href="/logout">Logout</a>
     <h1>Add New Art</h1>
-    <form action="/arts/add" method="post">
+    <form action="/arts/<%= data.id %>/edit" method="post">
         <label>Art Name:</label><br>
         <input type="text" name="name" value="<%= data.name %>"><br>
         <div class="error">
