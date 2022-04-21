@@ -36,15 +36,18 @@ class Controller {
     }
 
     static postLogin(req, res) {
-        const { userName, password } = req.body
-
-        User.findOne({ where: { userName } })
+        const {userName, password} = req.body
+        User.findOne({
+            where: {userName: userName}
+        })
             .then(user => {
                 if (user) {
                     const isValidPassword = bcrypt.compareSync(password, user.password)
 
                     if (isValidPassword) {
-                        return redirect("/")
+                        req.session.userId = user.id
+                        req.session.role = user.isSeller
+                        return res.redirect("/")
                     } else {
                         const error = "Invalid username / password"
                         return res.redirect(`/login?error=${error}`)
@@ -54,11 +57,21 @@ class Controller {
                     return res.redirect(`/login?error=${error}`)
                 }
             })
-            .catch(err => res.send("aasdd"))
+            .catch(err => res.send(err))
     }
 
     static home(req, res) {
-        res.send("Login success")
+        res.render("home")
+    }
+
+    static getLogout(req, res) {
+        req.session.destroy(err => {
+            if (err) {
+                res.send(err)
+            } else {
+                res.redirect("/login")
+            }
+        })
     }
 }
 
