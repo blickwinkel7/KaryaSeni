@@ -11,12 +11,16 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      Art.hasMany(models.Transaction)
+      Art.belongsToMany(models.User, {
+        through:models.Transaction
+      })
     }
   }
   Art.init({
     name: DataTypes.STRING,
     author: DataTypes.STRING,
-    price: DataTypes.STRING,
+    price: DataTypes.INTEGER,
     description: DataTypes.TEXT,
     status: DataTypes.BOOLEAN,
     imageUrl:DataTypes.STRING

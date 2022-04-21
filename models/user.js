@@ -12,6 +12,10 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       User.hasOne(models.Profile)
+      User.hasMany(models.Transaction)
+      User.belongsToMany(models.Art, {
+        through: models.Transaction
+      })
     }
   }
   User.init({
