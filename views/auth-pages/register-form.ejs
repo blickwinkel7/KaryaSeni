@@ -4,6 +4,12 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    .error {
+        font-size: small;
+        color: red;
+    }
+</style>
   <title>Register</title>
 </head>
 <body>
@@ -15,17 +21,29 @@
       Username: <br>
       <input type="text" name="userName" placeholder="Ex: kellog">
     </p>
-    
+    <div class="error">
+      <% if(errors.userName) { %>
+          <%= errors.userName.join(' , ')  %> 
+    <%  } %> 
+    </div>
     <p>
       Email: <br>
       <input type="text" name="email" placeholder="Ex: kellog@gmail.com">
     </p>
-    
+    <div class="error">
+      <% if(errors.email) { %>
+          <%= errors.email.join(' , ')  %> 
+    <%  } %> 
+  </div>
     <p>
       Password: <br>
       <input type="text" name="password" placeholder="Ex: password212">
     </p>
-    
+    <div class="error">
+      <% if(errors.password) { %>
+          <%= errors.password.join(' , ')  %> 
+    <%  } %> 
+  </div>
     <p>
       Role: <br>
       <select name="isSeller">
@@ -33,27 +51,47 @@
         <option value="buyer">Buyer</option>
       </select>
     </p>
-    
+    <div class="error">
+      <% if(errors.isSeller) { %>
+          <%= errors.isSeller.join(' , ')  %> 
+    <%  } %> 
+  </div>
     <p>
       First Name: <br>
       <input type="text" name="firstName" placeholder="Ex: John">
     </p>
-    
+    <div class="error">
+      <% if(errors.firstName) { %>
+          <%= errors.firstName.join(' , ')  %> 
+    <%  } %> 
+  </div>
     <p>
       Last Name: <br>
       <input type="text" name="lastName" placeholder="Ex: Wick">
     </p>
-    
+    <div class="error">
+      <% if(errors.lastName) { %>
+          <%= errors.lastName.join(' , ')  %> 
+    <%  } %> 
+  </div>
     <p>
       Date of Birth: <br>
       <input type="date" name="dateOfBirth">
     </p>
-    
+    <div class="error">
+      <% if(errors.dateOfBirth) { %>
+          <%= errors.dateOfBirth.join(' , ')  %> 
+    <%  } %> 
+  </div>
     <p>
       Profile Picture: <br>
       <input type="text" name="imagerUrl" placeholder="Ex: http://arah.in/memes-1">
     </p>
-
+    <div class="error">
+      <% if(errors.imagerUrl) { %>
+          <%= errors.imagerUrl.join(' , ')  %> 
+    <%  } %> 
+  </div>
     <p>
       <input type="submit" value="Create account">
     </p>
