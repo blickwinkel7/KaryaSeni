@@ -6,15 +6,30 @@ const bcrypt = require("bcryptjs")
 const { redirect } = require("express/lib/response")
 const sendEmail = require("../helpers/nodemailer")
 const transaction = require("../models/transaction")
+const { Op } = require("sequelize")
 
 
 class Controller {
     static readArts(req, res) {
-        Art.findAll({
+        const options = {
             where: {
                 status: false
             }
-        })
+        }
+        if (req.query.status === "all") {
+            delete options.where.status
+        }
+        if (req.query.search) {
+            options.where = [{...options.where}, {
+                name: {
+                    [Op.iLike]: `%${req.query.search}%`
+                }
+            }]
+        }
+
+
+
+        Art.findAll(options)
             .then((data) => {
                 return res.render("art", { data, formatedCurrency, formatedStatus })
             })
@@ -123,7 +138,7 @@ class Controller {
                 })
             })
             .then(transaction => {
-                return res.render("profile", {user, transaction})
+                return res.render("profile", {user, transaction, formatedCurrency})
             })
             .catch(err => res.send(err))
     }
@@ -214,7 +229,6 @@ class Controller {
             }
         })
             .then(art => {
-                console.log(art)
                 return Transaction.create({
                     price: art.price,
                     UserId: req.session.userId,

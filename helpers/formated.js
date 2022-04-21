@@ -2,14 +2,15 @@
 
 function formatedCurrency (price){
 
-    return price.toLocaleString('id-ID', { style: 'currency', currency: 'IDR' })
+    return `Rp. ${price.toLocaleString('id-ID')},00`
 }
 
 function formatedStatus(status){
+
     if(status === false){
         return 'Available'
     } else {
-        return 'Sold'
+        return 'sold'
     }
 }
 

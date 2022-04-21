@@ -9,61 +9,73 @@
 </head>
 
 <body>
-    <h1>THIS IS ART DISPLAY</h1>
+    <a href="/">Art Collection</a>
     <a href="/arts/add">Add New Art</a>
-    <a href="/profile">My profile page</a>
+    <a href="/profile">My Profile Page</a>
     <a href="/logout">Logout</a>
 
-    <table border="1">
-        <tr>
-            <th>
-                Name
-            </th>
-            <th>
-                Author
-            </th>
-            <th>
-                Price
-            </th>
-            <th>
-                Description
-            </th>
-            <th>
-                Status
-            </th>
-            <th>
-                Image
-            </th>
-            <th>
-                ACTION
-            </th>
-        </tr>
-        <% data.forEach(e=>{ %>
+    <h1>Art Collection</h1>
+
+    <form action="/">
+        <input type="text" name="search" placeholder="Search">
+        <select name="status">
+            <option value="all">All</option>
+            <option value="available only">Available Only</option>
+        </select>
+        <input type="submit" value="Search">
+    </form>
+    <% if (data.length > 0) { %>
+        <table border="1">
             <tr>
-                <td>
-                    <%= e.name %>
-                </td>
-                <td>
-                    <%= e.author %>
-                </td>
-                <td>
-                    <%= formatedCurrency(e.price) %>
-                </td>
-                <td>
-                    <%= e.description %>
-                </td>
-                <td>
-                    <%= formatedStatus(e.status) %>
-                </td>
-                <td>
-                    <img src="<%= e.imageUrl %>" width="100" height="50">
-                </td>
-                <td>
-                    <a href="/arts/<%= e.id %>/edit">EDIT</a> || <a href="/arts/<%= e.id %>/delete">DELETE</a> || <a href="/arts/<%= e.id %>/buy">BUY</a>
-                </td>
+                <th>
+                    Name
+                </th>
+                <th>
+                    Author
+                </th>
+                <th>
+                    Price
+                </th>
+                <th>
+                    Description
+                </th>
+                <th>
+                    Status
+                </th>
+                <th>
+                    Image
+                </th>
+                <th>
+                    ACTION
+                </th>
             </tr>
-            <% }) %>
-    </table>
+            <% data.forEach(e=>{ %>
+                <tr>
+                    <td>
+                        <%= e.name %>
+                    </td>
+                    <td>
+                        <%= e.author %>
+                    </td>
+                    <td>
+                        <%= formatedCurrency(e.price) %>
+                    </td>
+                    <td>
+                        <%= e.description %>
+                    </td>
+                    <td>
+                        <%= formatedStatus(e.status) %>
+                    </td>
+                    <td>
+                        <img src="<%= e.imageUrl %>" width="100" height="50">
+                    </td>
+                    <td>
+                        <a href="/arts/<%= e.id %>/edit">EDIT</a> || <a href="/arts/<%= e.id %>/delete">DELETE</a> || <a href="/arts/<%= e.id %>/buy">BUY</a>
+                    </td>
+                </tr>
+                <% }) %>
+        </table>
+    <% } %>
 </body>
 
 </html>
