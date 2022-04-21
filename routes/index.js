@@ -2,7 +2,11 @@
 
 const express = require("express")
 const router = express.Router()
-const Controller = require("../controllers/")
+const Controller = require("../controllers")
+
+router.get("/arts", Controller.readArts)
+
+
 
 // GET REGISTER
 router.get("/register", Controller.registerForm)
@@ -16,6 +20,7 @@ router.post("/login", Controller.postLogin)
 
 
 router.get("/", Controller.home)
+
 
 
 

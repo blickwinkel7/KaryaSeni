@@ -1,9 +1,20 @@
 "use strict"
-const { User, Profile } = require("../models")
+
+const { User, Profile, Art, Transaction } = require("../models")
+const formatedCurrency = require("../helpers/formated")
 const bcrypt = require("bcryptjs")
 const { redirect } = require("express/lib/response")
 
+
 class Controller {
+    static readArts(req, res) {
+        Art.findAll()
+            .then((data) => {
+                res.render("art", { data, formatedCurrency })
+            })
+            .catch(err => res.send(err))
+    }  
+    
     static registerForm(req, res) {
         res.render("auth-pages/register-form")
     }
