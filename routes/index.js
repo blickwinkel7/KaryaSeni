@@ -4,10 +4,8 @@ const express = require("express")
 const router = express.Router()
 const Controller = require("../controllers")
 
+// GET ARTS TABEL
 router.get("/arts", Controller.readArts)
-
-
-
 // GET REGISTER
 router.get("/register", Controller.registerForm)
 // POST REGISTER
