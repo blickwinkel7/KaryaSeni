@@ -16,7 +16,9 @@ class Controller {
                 status: false
             }
         }
-
+        if (req.query.status === "all") {
+            delete options.where.status
+        }
         if (req.query.search) {
             options.where = [{...options.where}, {
                 name: {
@@ -25,9 +27,7 @@ class Controller {
             }]
         }
 
-        if (req.query.status === "all") {
-            delete options.where.status
-        }
+
 
         Art.findAll(options)
             .then((data) => {
