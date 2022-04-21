@@ -18,7 +18,11 @@ module.exports = (sequelize, DataTypes) => {
     firstName: DataTypes.STRING,
     lastName: DataTypes.STRING,
     dateOfBirth: DataTypes.DATE,
-    imagerUrl: DataTypes.STRING
+    imagerUrl: DataTypes.STRING,
+    UserId:{
+      type: DataTypes.INTEGER,
+      allowNull:false
+    }
   }, {
     sequelize,
     modelName: 'Profile',

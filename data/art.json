@@ -1,0 +1,34 @@
+[
+    {
+        "name": "Acidulated Phosphate Fluoride",
+        "author": "Nikki Christofor",
+        "price": 725982,
+        "description": "Open heart valvuloplasty without replacement, unspecified valve",
+        "status": false,
+        "imageUrl": "http://dummyimage.com/239x100.png/5fa2dd/ffffff"
+    },
+    {
+        "name": "Lisinopril",
+        "author": "Gearard Splaven",
+        "price": 845196,
+        "description": "Closed reduction of dislocation of shoulder",
+        "status": false,
+        "imageUrl": "http://dummyimage.com/206x100.png/cc0000/ffffff"
+    },
+    {
+        "name": "BENZALKONIUM CHLORIDE",
+        "author": "Clive Chorlton",
+        "price": 574688,
+        "description": "Other diagnostic procedures on anus and perianal tissue",
+        "status": false,
+        "imageUrl": "http://dummyimage.com/207x100.png/cc0000/ffffff"
+    },
+    {
+        "name": "INTERLEUKIN-9",
+        "author": "Washington Legendre",
+        "price": 827514,
+        "description": "Microscopic examination of specimen from musculoskeletal system and of joint fluid, cell block and Papanicolaou smear",
+        "status": false,
+        "imageUrl": "http://dummyimage.com/215x100.png/ff4444/ffffff"
+    }
+]
