@@ -42,7 +42,11 @@ router.use((req, res, next) => {
 })
 
 router.get("/", Controller.home)
+
+router.get("/profile", Controller.profile)
+
 router.get("/arts/add", isSeller, Controller.formArt)
+
 
 
 
