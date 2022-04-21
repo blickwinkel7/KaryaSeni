@@ -8,4 +8,20 @@ router.get("/arts", Controller.readArts)
 
 
 
+// GET REGISTER
+router.get("/register", Controller.registerForm)
+// POST REGISTER
+router.post("/register", Controller.postRegister)
+
+// GET LOGIN
+router.get("/login", Controller.loginForm)
+// POST LOGIN
+router.post("/login", Controller.postLogin)
+
+
+router.get("/", Controller.home)
+
+
+
+
 module.exports = router

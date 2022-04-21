@@ -9,6 +9,8 @@ app.set("view engine", "ejs")
 app.use(express.urlencoded({extended:false}))
 app.use(routes)
 
+app.use("/", routes)
+
 app.listen(port, () =>{
     console.log(`Listening to port : ${port}`)
 })
