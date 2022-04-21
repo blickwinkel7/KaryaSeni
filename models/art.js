@@ -11,10 +11,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      Art.hasMany(models.Transaction)
-      Art.belongsToMany(models.User, {
-        through:models.Transaction
-      })
+      Art.hasOne(models.Transaction)
     }
   }
   Art.init({

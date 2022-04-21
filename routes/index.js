@@ -4,8 +4,12 @@ const express = require("express")
 const router = express.Router()
 const Controller = require("../controllers")
 
-// GET ARTS TABEL
-router.get("/arts", Controller.readArts)
+
+// ROUTES ART
+router.get("/arts",  Controller.readArts)
+router.get("/arts/add", (req, res) => res.send("add art"))
+
+
 // GET REGISTER
 router.get("/register", Controller.registerForm)
 // POST REGISTER
@@ -19,21 +23,21 @@ router.post("/login", Controller.postLogin)
 router.get("/logout", Controller.getLogout)
 
 const isSeller = function (req, res, next) {
-  if(req.session.userId && req.session.role !== "seller") {
-    const error = "You have no access"
-    res.redirect(`/login?error=${error}`)
-  } else {
-    next()
-  }
+    if (req.session.userId && req.session.role !== "seller") {
+        const error = "You have no access"
+        res.redirect(`/login?error=${error}`)
+    } else {
+        next()
+    }
 }
 
 router.use((req, res, next) => {
-  if (!req.session.userId) {
-    const error = "Please login first!"
-    res.redirect(`/login?error=${error}`)
-  }
-  
-  next()
+    if (!req.session.userId) {
+        const error = "Please login first!"
+        res.redirect(`/login?error=${error}`)
+    }
+
+    next()
 })
 
 router.get("/", Controller.home)

@@ -14,9 +14,6 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
       User.hasOne(models.Profile)
       User.hasMany(models.Transaction)
-      User.belongsToMany(models.Art, {
-        through: models.Transaction
-      })
     }
   }
   User.init({
