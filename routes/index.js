@@ -41,6 +41,7 @@ router.use((req, res, next) => {
 })
 
 router.get("/", Controller.home)
+router.get("/profile", Controller.profile)
 
 
 
