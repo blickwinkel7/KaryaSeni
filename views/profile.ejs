@@ -7,6 +7,10 @@
   <title>Profile</title>
 </head>
 <body>
+  <a href="/">Art Collection</a>
+  <a href="/arts/add">Add New Art</a>
+  <a href="/profile">My Profile Page</a>
+  <a href="/logout">Logout</a>
   <h1><%= user.Profile.firstName %>'s Profile</h1>
 
   <h5>Full Name</h5>
@@ -29,13 +33,15 @@
         <th>Name</th>
         <th>Author</th>
         <th>Price</th>
+        <th>Bought at</th>
       </tr>
       <% transaction.forEach(el => { %>
         <tr>
           <td><img src="<%= el.Art.imageUrl %>" alt="photo"></td>
           <td><%= el.Art.name %></td>
           <td><%= el.Art.author %></td>
-          <td><%= el.Art.price %></td>
+          <td><%= formatedCurrency(el.Art.price) %></td>
+          <td><%= el.createdAt.toLocaleString() %></td>
         </tr>
       <% }) %>
     </table>
