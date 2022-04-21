@@ -7,7 +7,8 @@ const Controller = require("../controllers")
 
 // ROUTES ART
 router.get("/arts",  Controller.readArts)
-router.get("/arts/add", (req, res) => res.send("add art"))
+router.get("/arts/add", Controller.formArt)
+router.post("/arts/add", Controller.createArt)
 
 
 // GET REGISTER

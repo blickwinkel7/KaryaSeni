@@ -24,6 +24,11 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'Art',
+    hooks: {
+      beforeCreate:(instance, option) =>{
+        instance.status = true
+      }
+    }
   });
   return Art;
 };
