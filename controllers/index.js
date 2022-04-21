@@ -149,6 +149,49 @@ class Controller {
                 res.send(err)
             })
     }
+
+    static getEditArts(req, res) {
+        const { id } = req.params
+        Art.findOne({ where: { id: id } })
+            .then((data) => {
+                res.render("edit-arts", { data, errors: {} })
+            })
+            .catch(err => res.send(err))
+    }
+
+    static updateArt(req, res) {
+        const { id } = req.params
+        const { name, author, price, description, imageUrl } = req.body
+        const editArt = {
+            name,
+            author,
+            price,
+            description,
+            imageUrl
+        }
+        Art.update(editArt, {
+            where:{
+                id:id
+            }
+        })
+        .then(() => {
+            res.redirect("/arts")
+        })
+        .catch(err => {
+            if (err.name == 'SequelizeValidationError') {
+                const errors = {}
+                err.errors.forEach(el => {
+                    if (errors[el.path]) {
+                        errors[el.path].push(el.message)
+                    } else {
+                        errors[el.path] = [el.message]
+                    }
+                })
+                return res.render("arts-form", { errors })
+            }
+            res.send(err)
+        })
+    }
 }
 
 module.exports = Controller

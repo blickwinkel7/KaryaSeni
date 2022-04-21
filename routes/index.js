@@ -46,6 +46,9 @@ router.get("/", Controller.home)
 router.get("/profile", Controller.profile)
 
 router.get("/arts/add", isSeller, Controller.formArt)
+router.get("/arts/:id/edit", isSeller, Controller.getEditArts)
+router.post("/arts/:id/edit",  Controller.updateArt)
+router.get("/arts/:id/delete", (req, res) => res.send("delete"))
 
 
 

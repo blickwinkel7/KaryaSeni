@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UPDATE</title>
+</head>
+<body>
+    <h1>Add New Art</h1>
+    <form action="/arts/add" method="post">
+        <label>Art Name:</label><br>
+        <input type="text" name="name" value="<%= data.name %>"><br>
+        <div class="error">
+            <% if(errors.name) { %>
+                <%= errors.name.join(', ')  %> 
+              <%  } %> 
+            </div>
+        <label>Author:</label><br>
+            <input type="text" name="author" value="<%= data.author %>"><br>
+            <div class="error">
+                <% if(errors.author) { %>
+                    <%= errors.author.join(' , ')  %> 
+              <%  } %> 
+            </div>
+        <label>Price:</label><br>
+            <input type="number" name="price" value="<%= data.price %>"><br>
+            <div class="error">
+                <% if(errors.price) { %>
+                    <%= errors.price.join(' , ')  %> 
+              <%  } %> 
+            </div>
+        <label>Description:</label><br>
+            <textarea name="description" id="" cols="30" rows="10" placeholder="write your description.."><%= data.description %></textarea>
+            <div class="error">
+                <% if(errors.description) { %>
+                    <%= errors.description.join(' , ')  %> 
+              <%  } %> 
+            </div><br>
+        <label>Upload Your Image Art:</label><br>
+        <input type="text" name="imageUrl" value="<%= data.imageUrl %>">
+        <div class="error">
+            <% if(errors.imageUrl) { %>
+                <%= errors.imageUrl.join(' , ')  %> 
+          <%  } %> 
+        </div> <br>
+        <input type="submit" value="Submit">
+    </form>
+</body>
+</html>
